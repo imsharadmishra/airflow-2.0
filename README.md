@@ -28,7 +28,7 @@ minikube start --cpus 4 --memory 8192
 ## Fork-repository
 Clone repository to your local
 ```
-git clone git@github.com:imsharadmishra/airflow-2.0.git
+git clone https://github.com/imsharadmishra/airflow-2.0.git
 ```
 
 ## Build-airflow-2.0-docker-image
