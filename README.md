@@ -30,9 +30,7 @@ git clone git@github.com:imsharadmishra/airflow-2.0.git
 ## Build-airflow-2.0-docker-image
 I have built a custom airflow-2.0 image with basic tools e.g. procps, vim etc for investigating issues in container.
 You can also built a custom image for your need, here is a very good document on how to built custom image:
-[Airflow-youtube](https://www.youtube.com/watch?v=wDr3Y7q2XoI)
-[Airflow-summit-Presentation](https://airflowsummit.org/slides/h2-ProductionContainerImages.pdf)
-[Airflow-documentation](https://airflow.apache.org/docs/apache-airflow/stable/production-deployment.html)
+ [Airflow-documentation](https://airflow.apache.org/docs/apache-airflow/stable/production-deployment.html)
 cd airflow-2.0/chart/dockerfiles/customairflow-2.0
 docker build -t airflowcustom:2.0.1rc2 .
 
@@ -59,6 +57,6 @@ Airflow webui can be launched by running following command:
 minikube service airflow-webserver --namespace airflow
 
 ## References
-[Airflow-youtube](https://www.youtube.com/watch?v=wDr3Y7q2XoI)
-[Airflow-summit-Presentation](https://airflowsummit.org/slides/h2-ProductionContainerImages.pdf)
-[Airflow-documentation](https://airflow.apache.org/docs/apache-airflow/stable/production-deployment.html)
+1. [Airflow-youtube](https://www.youtube.com/watch?v=wDr3Y7q2XoI)
+2. [Airflow-summit-Presentation](https://airflowsummit.org/slides/h2-ProductionContainerImages.pdf)
+3. [Airflow-documentation](https://airflow.apache.org/docs/apache-airflow/stable/production-deployment.html)
