@@ -1,9 +1,9 @@
 # User overrides
-config.yaml
-config.yml
+#config.yaml
+#config.yml
 
 # Build dir
-repository
+#repository
 
 # Chart dependencies
 #**/charts/*.tgz
