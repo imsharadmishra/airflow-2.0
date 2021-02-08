@@ -68,6 +68,8 @@ minikube dashboard
 Airflow webui can be launched by running following command:
 ```
 minikube service airflow-webserver --namespace airflow
+username=airflow
+password=airflow
 ```
 
 ## References
