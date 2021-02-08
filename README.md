@@ -42,6 +42,8 @@ docker build -t airflowcustom:2.0.1rc2 .
 
 ## Install-chart for airflow-2.0
 ```
+kubectl create namespace airflow
+cd airflow-2.0/chart
 helm install airflow . \
   --set images.airflow.repository=sharadmishra/airflowcustom \
   --set images.airflow.tag=2.0.1rc2 \
