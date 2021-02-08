@@ -20,7 +20,7 @@ Please make sure docker has been allocated 4 cpus and 8GB of memory.
 Start minikube with following command:
 minikube start --cpus 4 --memory 8192
 
-## Install-chart
+## Install-chart for airflow-2.0
 helm install airflow . \
   --set images.airflow.repository=sharadmishra/airflowcustom \
   --set images.airflow.tag=2.0.1rc2 \
