@@ -3,10 +3,13 @@
 
 **Table of contents**
 - [Pre-requisite](#pre-requisite)
+- [Fork-repository](#fork-repository)
+- [Build-airflow-2.0-docker-image](#build-airflow-2.0-docker-image)
 - [Start-minikube](#start-minikube)
-- [Install-chart for airflow-2.0] (#chart-airflow-2.0)
-- [Dashboard-minikube] (#dashboard-minikube)
-- [Airflow-webui] (#airflow-webui)
+- [Install-chart for airflow-2.0](#chart-airflow-2.0)
+- [Dashboard-minikube](#dashboard-minikube)
+- [Airflow-webui](#airflow-webui)
+- [References](#references)
 
 ## Pre-requisite
 In order to run apache-airflow-2.0 locally on kubernetes, following pre-requisites needs to be installed
@@ -19,6 +22,19 @@ Once minikube is installed, start minikube.
 Please make sure docker has been allocated 4 cpus and 8GB of memory.
 Start minikube with following command:
 minikube start --cpus 4 --memory 8192
+
+## Fork-repository
+Clone repository to your local
+git clone git@github.com:imsharadmishra/airflow-2.0.git
+
+## Build-airflow-2.0-docker-image
+I have built a custom airflow-2.0 image with basic tools e.g. procps, vim etc for investigating issues in container.
+You can also built a custom image for your need, here is a very good document on how to built custom image:
+[Airflow-youtube](https://www.youtube.com/watch?v=wDr3Y7q2XoI)
+[Airflow-summit-Presentation](https://airflowsummit.org/slides/h2-ProductionContainerImages.pdf)
+[Airflow-documentation](https://airflow.apache.org/docs/apache-airflow/stable/production-deployment.html)
+cd airflow-2.0/chart/dockerfiles/customairflow-2.0
+docker build -t airflowcustom:2.0.1rc2 .
 
 ## Install-chart for airflow-2.0
 helm install airflow . \
@@ -41,3 +57,8 @@ minikube dashboard
 ## Airflow-webui
 Airflow webui can be launched by running following command:
 minikube service airflow-webserver --namespace airflow
+
+## References
+[Airflow-youtube](https://www.youtube.com/watch?v=wDr3Y7q2XoI)
+[Airflow-summit-Presentation](https://airflowsummit.org/slides/h2-ProductionContainerImages.pdf)
+[Airflow-documentation](https://airflow.apache.org/docs/apache-airflow/stable/production-deployment.html)
