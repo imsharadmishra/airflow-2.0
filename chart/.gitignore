@@ -6,4 +6,4 @@ config.yml
 repository
 
 # Chart dependencies
-**/charts/*.tgz
+#**/charts/*.tgz
