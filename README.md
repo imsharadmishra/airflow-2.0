@@ -40,8 +40,9 @@ cd airflow-2.0/chart/dockerfiles/customairflow-2.0
 docker build -t airflowcustom:2.0.1rc2 .
 ```
 
-## Install-chart for airflow-2.0 using Kubernetes Executor
+## Install-chart for airflow-2.0
 ```
+# Using Executor type as Kubernetes Executor
 kubectl create namespace airflow
 cd airflow-2.0/chart
 helm install airflow . \
