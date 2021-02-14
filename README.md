@@ -70,7 +70,7 @@ helm install airflow . \
   --set webserver.defaultUser.email=abc@xyz.com \
   --set webserver.defaultUser.password=airflow \
   --set executor=CeleryExecutor \
-  --set workeres.replicas=2
+  --set workeres.replicas=2 \
   --namespace airflow
 ```
 
