@@ -220,25 +220,41 @@ data:
   metadataSecretName: ~
   resultBackendSecretName: ~
 
-  # Otherwise pass connection values in
   metadataConnection:
-    user: postgres
-    pass: postgres
-    host: ~
-    port: 5432
-    db: postgres
-    sslmode: disable
+    user: root
+    pass: root
+    host: airflow-mysql-service
+    port: 3306
+    db: data_airflow
+#    sslmode: disable
+    sslmode: false
   resultBackendConnection:
-    user: postgres
-    pass: postgres
-    host: ~
-    port: 5432
-    db: postgres
-    sslmode: disable
+    user: root
+    pass: root
+    host: airflow-mysql-service
+    port: 3306
+    db: data_airflow
+    sslmode: false
+#    sslmode: disable
+  # Otherwise pass connection values in
+#  metadataConnection:
+#    user: postgres
+#    pass: postgres
+#    host: ~
+#    port: 5432
+#    db: postgres
+#    sslmode: disable
+#  resultBackendConnection:
+#    user: postgres
+#    pass: postgres
+#    host: ~
+#    port: 5432
+#    db: postgres
+#    sslmode: disable
 
 # Fernet key settings
-fernetKey: ~
-fernetKeySecretName: ~
+fernetKey: Tm90dEpHSk9oOHFtQXFJanRDbnB1QmFpVUVJSU1iSEk=
+#fernetKeySecretName: airflow-fernet-key
 
 
 # In order to use kerberos you need to create secret containing the keytab file
@@ -627,7 +643,7 @@ cleanup:
 # Configuration for postgresql subchart
 # Not recommended for production
 postgresql:
-  enabled: true
+  enabled: false
   postgresqlPassword: postgres
   postgresqlUsername: postgres
 
@@ -717,13 +733,17 @@ dags:
     ## the name of an existing PVC to use
     existingClaim: ~
   gitSync:
-    enabled: false
+    enabled: true
     # git repo clone url
     # ssh examples ssh://git@github.com/apache/airflow.git
     # git@github.com:apache/airflow.git
     # https example: https://github.com/apache/airflow.git
-    repo: https://github.com/apache/airflow.git
-    branch: v1-10-stable
+#    repo: https://github.com/apache/airflow.git
+#    repo: https://github.com/imsharadmishra/Dags.git
+    repo: git@gitlab.indexexchange.com:sharad.mishra/dags.git
+#    branch: v1-10-stable
+#    branch: main
+    branch: master
     rev: HEAD
     root: "/git"
     dest: "repo"
@@ -732,7 +752,8 @@ dags:
     maxFailures: 0
     # subpath within the repo where dags are located
     # should be "" if dags are at repo root
-    subPath: "tests/dags"
+#    subPath: "tests/dags"
+    subPath: dags
     # if your repo needs a user name password
     # you can load them to a k8s secret like the one below
     #   ---
@@ -745,7 +766,7 @@ dags:
     #     GIT_SYNC_PASSWORD: <base64_encoded_git_password>
     # and specify the name of the secret below
     #
-    # credentialsSecret: git-credentials
+#    credentialsSecret: git-credentials
     #
     #
     # If you are using an ssh clone url, you can load
@@ -759,7 +780,7 @@ dags:
     #     # key needs to be gitSshKey
     #     gitSshKey: <base64_encoded_data>
     # and specify the name of the secret below
-    # sshKeySecret: airflow-ssh-secret
+    sshKeySecret: airflow-ssh-secret
     #
     # If you are using an ssh private key, you can additionally
     # specify the content of your known_hosts file, example:
@@ -768,6 +789,16 @@ dags:
     #    <host1>,<ip1> <key1>
     #    <host2>,<ip2> <key2>
     # interval between git sync attempts in seconds
-    wait: 60
+    wait: 20
     containerName: git-sync
     uid: 65533
+
+mysqlConnString: mysql+mysqlconnector://root:root@mysql-service:3306/data_airflow
+mysql:
+  image: sharadmishra/mysqlairflow
+  tag: v1
+  rootPassword: root
+  port: 3306
+  mysqlConfFilePath: "/Users/sharad.mishra/Documents/ix/fun/airflow-post/airflow-2.0/chart/configuration"
+  pvSize: "1G"
+  serviceType: "ClusterIP"

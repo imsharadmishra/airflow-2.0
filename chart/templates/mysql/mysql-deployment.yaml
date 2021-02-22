@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-mysql
+  labels:
+    tier: airflow
+    component: mysql
+    release: {{ .Release.Name }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    heritage: {{ .Release.Service }}
+{{- with .Values.labels }}
+{{ toYaml . | indent 4 }}
+{{- end }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-mysql
+    spec:
+      containers:
+      - image: {{ printf "%s:%s" .Values.mysql.image .Values.mysql.tag}}
+        name: {{ .Release.Name }}-mysql
+        env:
+          # Use secret in real usage
+        - name: MYSQL_ROOT_PASSWORD
+          value: {{ .Values.mysql.rootPassword}}
+        ports:
+        - containerPort: {{ .Values.mysql.port }}
+          name: {{ .Release.Name }}-mysql
+        volumeMounts:
+        - name: {{ .Release.Name }}-mysql-persistent-storage
+          mountPath: /etc/mysql/conf.d
+      volumes:
+      - name: {{ .Release.Name }}-mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: {{ .Release.Name }}-mysql-pv-claim

@@ -436,7 +436,7 @@
                         },
                         "sslmode": {
                             "description": "The database SSL parameter.",
-                            "type": "string"
+                            "type": "boolean"
                         }
                     }
                 },
@@ -470,7 +470,7 @@
                         },
                         "sslmode": {
                             "description": "The database SSL parameter.",
-                            "type": "string"
+                            "type": "boolean"
                         }
                     }
                 }

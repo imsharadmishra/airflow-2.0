@@ -62,6 +62,7 @@ spec:
           imagePullPolicy: {{ .Values.images.airflow.pullPolicy }}
           # Support running against 1.10.x and 2.0.0dev/master
           args: ["bash", "-c", "airflow upgradedb || airflow db upgrade"]
+#          args: ["bash", "-c", "echo Migration Finished"]
           envFrom:
           {{- include "custom_airflow_environment_from" . | default "\n  []" | indent 10 }}
           env:

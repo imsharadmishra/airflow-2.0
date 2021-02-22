@@ -42,26 +42,10 @@ docker build -t airflowcustom:2.0.1rc2 .
 
 ## Install-chart for airflow-2.0
 ```
-# Using Executor type as Kubernetes Executor
-kubectl create namespace airflow
-cd airflow-2.0/chart
-helm install airflow . \
-  --set images.airflow.repository=sharadmishra/airflowcustom \
-  --set images.airflow.tag=2.0.1rc2 \
-  --set webserver.defaultUser.enabled=true \
-  --set webserver.defaultUser.role=Admin \
-  --set webserver.defaultUser.username=airflow \
-  --set webserver.defaultUser.firstName=abc \
-  --set webserver.defaultUser.lastName=xyz \
-  --set webserver.defaultUser.email=abc@xyz.com \
-  --set webserver.defaultUser.password=airflow \
-  --set executor=KubernetesExecutor \
-  --namespace airflow
-
 # Using Executor type as Celery Executor
 helm install airflow . \
-  --set images.airflow.repository=sharadmishra/airflowcustom \
-  --set images.airflow.tag=2.0.1rc2 \
+  --set images.airflow.repository=sharadmishra/airflowspark \
+  --set images.airflow.tag=2.0.1ssl \
   --set webserver.defaultUser.enabled=true \
   --set webserver.defaultUser.role=Admin \
   --set webserver.defaultUser.username=airflow \
@@ -70,8 +54,7 @@ helm install airflow . \
   --set webserver.defaultUser.email=abc@xyz.com \
   --set webserver.defaultUser.password=airflow \
   --set executor=CeleryExecutor \
-  --set workeres.replicas=2 \
-  --namespace airflow
+--namespace airflow
 ```
 
 ## Dashboard-minikube

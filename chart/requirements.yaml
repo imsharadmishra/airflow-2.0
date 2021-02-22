@@ -15,8 +15,13 @@
 # specific language governing permissions and limitations
 # under the License.
 ---
-dependencies:
-  - name: postgresql
-    version: 6.3.12
-    repository: "@stable"
-    condition: postgresql.enabled
+#dependencies:
+#  - name: postgresql
+#    version: 6.3.12
+#    repository: "@stable"
+#    condition: postgresql.enabled
+#dependencies:
+#  - name: postgresql
+#    version: 6.3.12
+#    repository: "@stable"
+#    condition: postgresql.enabled

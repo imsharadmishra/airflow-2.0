@@ -3,5 +3,6 @@ USER root
 RUN  apt-get update -y && apt-get install -y \
     procps \
     vim
+RUN pip install apache-airflow-providers-apache-spark
 COPY dags/ /opt/airflow/dags/
 USER airflow

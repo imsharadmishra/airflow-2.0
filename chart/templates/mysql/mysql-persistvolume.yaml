@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-mysql-pv-volume
+  labels:
+    type: local
+    tier: airflow
+    component: mysql
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+spec:
+  storageClassName: manual
+  capacity:
+    storage: {{ .Values.mysql.pvSize }}
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: {{ .Values.mysql.mysqlConfFilePath }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-mysql-pv-claim
+  labels:
+    tier: airflow
+    component: mysql
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.mysql.pvSize }}
